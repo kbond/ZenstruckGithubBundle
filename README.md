@@ -37,3 +37,4 @@ Enables a Github repository to become the host of static content for your cms.
 # Todo
 
 * Allow deeper levels (need slashes in route params - not sure how to do this)
+* Cache with Doctrine2
