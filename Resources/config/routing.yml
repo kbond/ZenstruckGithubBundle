@@ -1,0 +1,3 @@
+github.cms.homepage:
+    pattern:  /
+    defaults: { _controller: ZenstruckGithubCMSBundle:CMS:show }

@@ -1,0 +1,11 @@
+parameters:
+    github.cms.user: ~
+    github.cms.repository: ~
+
+services:
+    github.cms.client:
+        class: Github_Client
+
+    github.cms.manager:
+        class: Zenstruck\GithubCMSBundle\Github\CMS\Manager
+        arguments: ["@github.cms.client", %github.cms.user%, %github.cms.repository%]
