@@ -7,9 +7,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CMSController extends Controller
 {
-    public function showAction()
+    public function showAction($path)
     {
-        $file = $this->get('github.cms.manager')->getFile('about');
+        $file = $this->get('github.cms.manager')->getFile($path);
 
         switch (pathinfo($file['name'], PATHINFO_EXTENSION)) {
             case 'md':
@@ -24,6 +24,8 @@ class CMSController extends Controller
                 break;
         }
 
-        return $this->render('ZenstruckGithubCMSBundle:CMS:show.html.twig', array('content' => $file['data'], 'format' => $format));
+        $this->generateUrl('github.cms.homepage');
+
+        return $this->render('ZenstruckGithubCMSBundle:CMS:show.html.twig', array('content' => $file, 'format' => $format));
     }
 }

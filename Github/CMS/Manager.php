@@ -7,7 +7,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class Manager
 {
     /* @var \Github_Client */
-
     protected $client;
     protected $user;
     protected $repository;

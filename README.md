@@ -15,21 +15,25 @@ Enables a Github repository to become the host of static content for your cms.
 
 2. Add the ``Zenstruck`` namespace to your autoloader:
 
-    // app/autoload.php
-    $loader->registerNamespaces(array(
-       'Zenstruck' => __DIR__.'/../vendor/bundles',
-       // your other namespaces
-    ));
+        // app/autoload.php
+        $loader->registerNamespaces(array(
+           'Zenstruck' => __DIR__.'/../vendor/bundles',
+           // your other namespaces
+        ));
 
 2. Add the ``Github`` prefix to your autoloader:
 
-    // app/autoload.php
-    $loader->registerPrefixes(array(
-        'Github_'            => __DIR__.'/../vendor/php-github-api/lib'
-        // your other prefixes
-    ));
+        // app/autoload.php
+        $loader->registerPrefixes(array(
+            'Github_'            => __DIR__.'/../vendor/php-github-api/lib'
+            // your other prefixes
+        ));
 
 # Supported Formats
 
 * HTML
 * Markdown
+
+# Todo
+
+* Allow deeper levels (need slashes in route params - not sure how to do this)
