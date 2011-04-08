@@ -7,5 +7,5 @@ services:
         class: Github_Client
 
     github.cms.manager:
-        class: Zenstruck\GithubCMSBundle\Github\CMS\Manager
+        class: Zenstruck\GithubCMSBundle\Github\Manager
         arguments: ["@github.cms.client", %github.cms.user%, %github.cms.repository%]
