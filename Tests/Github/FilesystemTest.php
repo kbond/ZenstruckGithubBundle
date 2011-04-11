@@ -19,33 +19,34 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
     {
         $file = $this->manager->getMatchingFile('index');
 
-        $this->assertTrue($file['name'] == 'index.md');
+        $this->assertEquals($file->getPath(), 'index.md');
 
         $file = $this->manager->getMatchingFile('index.md');
 
-        $this->assertTrue($file['name'] == 'index.md');
+        $this->assertEquals($file->getPath(), 'index.md');
 
         $file = $this->manager->getMatchingFile('subfolder/projects');
 
-        $this->assertTrue($file['name'] == 'subfolder/projects.md');
+        $this->assertEquals($file->getPath(), 'subfolder/projects.md');
 
         $file = $this->manager->getMatchingFile('htmlfile');
 
-        $this->assertTrue($file['name'] == 'htmlfile.html');
+        $this->assertEquals($file->getPath(), 'htmlfile.html');
     }
 
     public function testFileWithNoExtension()
     {
         $file = $this->manager->getMatchingFile('noextension');
 
-        $this->assertTrue($file['name'] == 'noextension');
+        $this->assertEquals($file->getPath(), 'noextension');
+
     }
 
     public function testSubfolderIndex()
     {
         $file = $this->manager->getMatchingFile('subfolder');
 
-        $this->assertTrue($file['name'] == 'subfolder/index.md');
+        $this->assertEquals($file->getPath(), 'subfolder/index.md');
     }
 
     /**

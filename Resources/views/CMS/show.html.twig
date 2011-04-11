@@ -2,8 +2,8 @@
 
 {% block body %}
 {% if format == 'markdown' %}
-    {{ content.data | markdown }}
+    {{ content.content | markdown }}
 {% else %}
-    {{ content.data | raw }}
+    {{ content.content | raw }}
 {% endif %}
 {% endblock %}

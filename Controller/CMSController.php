@@ -11,7 +11,7 @@ class CMSController extends Controller
     {
         $file = $this->get('zenstruck.github.filesystem')->getMatchingFile($path);
 
-        switch (pathinfo($file['name'], PATHINFO_EXTENSION)) {
+        switch (pathinfo($file->getPath(), PATHINFO_EXTENSION)) {
             case 'md':
             case 'markdown':
             case 'mdown':

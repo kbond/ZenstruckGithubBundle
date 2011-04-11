@@ -57,9 +57,25 @@ class Filesystem
      */
     public function getFile($path)
     {
-        return $this->client->getObjectApi()->showBlob($this->user, $this->repository, $this->treeSHA, $path);
+        $blob = $this->client->getObjectApi()->showBlob($this->user, $this->repository, $this->treeSHA, $path);
+        $info = $this->client->getCommitApi()->getFileCommits($this->user, $this->repository, $this->branch, $path);
+
+        $file = new File();
+        $file->setPath($blob['name']);
+        $file->setContent($blob['data']);
+        $file->setAuthor($info[0]['author']['name']);
+        $file->setUpdated($info[0]['committed_date']);
+
+        $file->setCreated($info[count($info)-1]['committed_date']);
+
+        return $file;
     }
 
+    /**
+     * Returns an array of file paths on repo
+     *
+     * @return array - the list of files ('path' => 'id')
+     */
     public function getFileList()
     {   
         return $this->client->getObjectApi()->listBlobs($this->user, $this->repository, $this->treeSHA);
