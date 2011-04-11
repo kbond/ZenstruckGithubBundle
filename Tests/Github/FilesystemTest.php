@@ -12,7 +12,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
     {
         $client = new \Github_Client();
 
-        $this->manager = new Filesystem($client, 'kbond', 'GithubCMSBundle-test', 'master');
+        $this->manager = new Filesystem($client, 'kbond', 'GithubCMSBundle', 'test-data');
     }
 
     public function testFindFile()
