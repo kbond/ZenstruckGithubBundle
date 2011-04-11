@@ -2,7 +2,7 @@
 
 namespace Zenstruck\GithubCMSBundle\Tests\Github;
 
-use Zenstruck\GithubCMSBundle\Github\Manager;
+use Zenstruck\GithubCMSBundle\Github\Filesystem;
 
 class ManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,38 +12,38 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
     {
         $client = new \Github_Client();
 
-        $this->manager = new Manager($client, 'kbond', 'GithubCMSBundle-test');
+        $this->manager = new Filesystem($client, 'kbond', 'GithubCMSBundle-test', 'master');
     }
 
     public function testFindFile()
     {
-        $file = $this->manager->getFile('index');
+        $file = $this->manager->getMatchingFile('index');
 
         $this->assertTrue($file['name'] == 'index.md');
 
-        $file = $this->manager->getFile('index.md');
+        $file = $this->manager->getMatchingFile('index.md');
 
         $this->assertTrue($file['name'] == 'index.md');
 
-        $file = $this->manager->getFile('subfolder/projects');
+        $file = $this->manager->getMatchingFile('subfolder/projects');
 
         $this->assertTrue($file['name'] == 'subfolder/projects.md');
 
-        $file = $this->manager->getFile('htmlfile');
+        $file = $this->manager->getMatchingFile('htmlfile');
 
         $this->assertTrue($file['name'] == 'htmlfile.html');
     }
 
     public function testFileWithNoExtension()
     {
-        $file = $this->manager->getFile('noextension');
+        $file = $this->manager->getMatchingFile('noextension');
 
         $this->assertTrue($file['name'] == 'noextension');
     }
 
     public function testSubfolderIndex()
     {
-        $file = $this->manager->getFile('subfolder');
+        $file = $this->manager->getMatchingFile('subfolder');
 
         $this->assertTrue($file['name'] == 'subfolder/index.md');
     }
@@ -53,6 +53,6 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testFileNotFound()
     {
-        $file = $this->manager->getFile('projects');
+        $file = $this->manager->getMatchingFile('projects');
     }
 }

@@ -9,7 +9,7 @@ class CMSController extends Controller
 {
     public function showAction($path)
     {
-        $file = $this->get('github.cms.manager')->getFile($path);
+        $file = $this->get('zenstruck.github.filesystem')->getMatchingFile($path);
 
         switch (pathinfo($file['name'], PATHINFO_EXTENSION)) {
             case 'md':

@@ -29,12 +29,17 @@ Enables a Github repository to become the host of static content for your cms.
             // your other prefixes
         ));
 
-# Supported Formats
+# Configuration
 
-* HTML
-* Markdown
+    # app/config/config.yml
+    zenstruck_github_cms:
+        user: # the github username
+        repo: # the github reponame
+        branch: master # git branch
+
 
 # Todo
 
+* Controller to publish content file based on a github path
 * Allow deeper levels (need slashes in route params - not sure how to do this)
-* Cache with Doctrine2
+* Cache?
