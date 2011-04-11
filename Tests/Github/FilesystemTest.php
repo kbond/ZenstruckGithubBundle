@@ -55,4 +55,11 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
     {
         $file = $this->manager->getMatchingFile('projects');
     }
+
+    public function testFileList()
+    {
+        $files = $this->manager->getFileList();
+
+        $this->assertArrayHasKey('index.md', $files);
+    }
 }

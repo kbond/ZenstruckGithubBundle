@@ -37,6 +37,23 @@ Enables a Github repository to become the host of static content for your cms.
         repo: # the github reponame
         branch: master # git branch
 
+# Usage
+    
+    // get service
+    $repo = $this->get('zenstruck.github.filesystem');
+
+    // get file from repo (extension required)
+    $index = $repo->getFile('index.md');
+
+    $contents = $index['data'];
+
+    // get a file from (extension not required)
+    $index = $repo->getMatchingFile('index');
+
+    $contents = $index['data'];
+
+    // get file list
+    $files = $repo->getFileList();
 
 # Todo
 

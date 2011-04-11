@@ -31,7 +31,7 @@ class Filesystem
      */
     public function getMatchingFile($path)
     {
-        $blobs = $this->getFiles();
+        $blobs = $this->getFileList();
 
         // match path
         $file = $this->matchPath($blobs, $path);
@@ -60,7 +60,7 @@ class Filesystem
         return $this->client->getObjectApi()->showBlob($this->user, $this->repository, $this->treeSHA, $path);
     }
 
-    public function getFiles()
+    public function getFileList()
     {   
         return $this->client->getObjectApi()->listBlobs($this->user, $this->repository, $this->treeSHA);
     }
