@@ -21,13 +21,25 @@ Enables a Github repository to become the host of static content for your cms.
            // your other namespaces
         ));
 
-2. Add the ``Github`` prefix to your autoloader:
+3. Add the ``Github`` prefix to your autoloader:
 
         // app/autoload.php
         $loader->registerPrefixes(array(
             'Github_'            => __DIR__.'/../vendor/php-github-api/lib'
             // your other prefixes
         ));
+
+4. Add this bundle to your application's kernel:
+
+        // app/AppKernel.php
+         public function registerBundles()
+         {
+             return array(
+                 // ...
+                 new Zenstruck\GithubCMSBundle\GithubCMSBundle(),
+                 // ...
+             );
+         }
 
 # Configuration
 
