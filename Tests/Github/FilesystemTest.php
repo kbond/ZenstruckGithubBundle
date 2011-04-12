@@ -59,8 +59,25 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testFileList()
     {
-        $files = $this->manager->getFileList();
+        $list = $this->manager->getFileList();
 
-        $this->assertArrayHasKey('index.md', $files);
+        $this->assertEquals(6, count($list));
+        $this->assertContains('index.md', $list);
+
+        $list = $this->manager->getFileList('subfolder');
+
+        $this->assertEquals(2, count($list));
+        $this->assertContains('subfolder/index.md', $list);
+    }
+
+    public function testGetFiles()
+    {
+        $files = $this->manager->getFiles();
+
+        $this->assertEquals(6, count($files));
+
+        $files = $this->manager->getFiles('subfolder');
+
+        $this->assertEquals(2, count($files));
     }
 }

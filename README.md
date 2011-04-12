@@ -57,15 +57,18 @@ Enables a Github repository to become the host of static content for your cms.
     // get file from repo (extension required)
     $index = $repo->getFile('index.md');
 
-    $contents = $index['data'];
+    $contents = $index->getContent();
 
     // get a file from (extension not required)
     $index = $repo->getMatchingFile('index');
 
-    $contents = $index['data'];
+    $contents = $index->getContent();
 
     // get file list
     $files = $repo->getFileList();
+
+    // get file list in subdir
+    $files = $repo->getFileList('subdir');
 
 # Todo
 

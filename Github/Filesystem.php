@@ -7,6 +7,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class Filesystem
 {
     /* @var \Github_Client */
+
     protected $client;
     protected $user;
     protected $repository;
@@ -31,29 +32,29 @@ class Filesystem
      */
     public function getMatchingFile($path)
     {
-        $blobs = $this->getFileList();
+        $file_list = $this->getFileList();
 
         // match path
-        $file = $this->matchPath($blobs, $path);
+        $filesname = $this->matchPath($file_list, $path);
 
         // if not found, try with index (subdirectory)
-        if (!$file)
-            $file = $this->matchPath ($blobs, $path.'/index');
+        if (!$filesname)
+            $filesname = $this->matchPath($file_list, $path . '/index');
 
         // file doesn't exist
-        if (!$file)
+        if (!$filesname)
             throw new NotFoundHttpException('File not found in github repository');
 
-        $blob = $this->getFile($file);
+        $file = $this->getFile($filesname);
 
-        return $blob;
+        return $file;
     }
 
     /**
      * Returns a file (exact repo path required)
      *
      * @param string $path
-     * @return File blob array
+     * @return File
      */
     public function getFile($path)
     {
@@ -66,26 +67,59 @@ class Filesystem
         $file->setAuthor($info[0]['author']['name']);
         $file->setUpdated($info[0]['committed_date']);
 
-        $file->setCreated($info[count($info)-1]['committed_date']);
+        $file->setCreated($info[count($info) - 1]['committed_date']);
 
         return $file;
     }
 
     /**
-     * Returns an array of file paths on repo
+     * Returns an array of File objects
+     * **CAUTION** Many API calls on large repos
      *
-     * @return array - the list of files ('path' => 'id')
+     * @param string $path - the directory path to look in
      */
-    public function getFileList()
-    {   
-        return $this->client->getObjectApi()->listBlobs($this->user, $this->repository, $this->treeSHA);
+    public function getFiles($path = '')
+    {
+        $file_list = $this->getFileList($path);
+
+        $files = array();
+
+        // hyrdate
+        foreach ($file_list as $filename)
+            $files[] = $this->getFile($filename);
+
+        return $files;
     }
 
-    protected function matchPath($blobs, $path)
+    /**
+     * Returns an array of file paths in repo
+     *
+     * @param string $path - the directory path to look in
+     * @return array - the list of files ('path' => 'id')
+     */
+    public function getFileList($path = '')
     {
-        foreach ($blobs as $blob => $sha)
-            if (preg_match('#^' . $path . '(\.|$)#', $blob))
-                return $blob;
+        $blobs = $this->client->getObjectApi()->listBlobs($this->user, $this->repository, $this->treeSHA);
+
+        if (!$path)
+            return array_keys($blobs);
+
+        $files = array();
+
+        foreach ($blobs as $key => $id)
+        {
+            if (preg_match('#^'.$path.'#', $key))
+                $files[] = $key;
+        }
+
+        return $files;
+    }
+
+    protected function matchPath($files, $path)
+    {
+        foreach ($files as $file)
+            if (preg_match('#^' . $path . '(\.|$)#', $file))
+                return $file;
 
         return null;
     }
