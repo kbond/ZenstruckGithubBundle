@@ -1,8 +1,8 @@
 <?php
 
-namespace Zenstruck\GithubCMSBundle\Tests\Github;
+namespace Zenstruck\GithubBundle\Tests\Github;
 
-use Zenstruck\GithubCMSBundle\Github\Filesystem;
+use Zenstruck\GithubBundle\Github\Filesystem;
 
 class ManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
     {
         $client = new \Github_Client();
 
-        $this->manager = new Filesystem($client, 'kbond', 'GithubCMSBundle', 'test-data');
+        $this->manager = new Filesystem($client, 'kbond', 'GithubBundle', 'test-data');
     }
 
     public function testFindFile()

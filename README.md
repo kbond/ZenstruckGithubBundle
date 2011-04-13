@@ -10,7 +10,7 @@ Enables a Github repository to become the host of static content for your cms.
 
 1. Add this bundle and php-github-api to your Symfony2 project:
 
-    $ git submodule add git://github.com/kbond/GithubCMSBundle.git vendor/bundles/Zenstruck/GithubCMSBundle
+    $ git submodule add git://github.com/kbond/GithubBundle.git vendor/bundles/Zenstruck/GithubBundle
     $ git submodule add git://github.com/ornicar/php-github-api.git vendor/php-github-api
 
 2. Add the ``Zenstruck`` namespace to your autoloader:
@@ -36,7 +36,7 @@ Enables a Github repository to become the host of static content for your cms.
          {
              return array(
                  // ...
-                 new Zenstruck\GithubCMSBundle\GithubCMSBundle(),
+                 new Zenstruck\GithubBundle\ZenstruckGithubBundle(),
                  // ...
              );
          }
@@ -44,7 +44,7 @@ Enables a Github repository to become the host of static content for your cms.
 # Configuration
 
     # app/config/config.yml
-    zenstruck_github_cms:
+    zenstruck_github:
         user: # the github username
         repo: # the github reponame
         branch: master # git branch

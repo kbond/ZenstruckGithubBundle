@@ -1,9 +1,0 @@
-{% extends "::base.html.twig" %}
-
-{% block body %}
-{% if format == 'markdown' %}
-    {{ content.content | markdown }}
-{% else %}
-    {{ content.content | raw }}
-{% endif %}
-{% endblock %}

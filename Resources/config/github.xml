@@ -6,7 +6,7 @@
 
     <parameters>
         <parameter key="zenstruck.github.client.class">Github_Client</parameter>
-        <parameter key="zenstruck.github.filesystem.class">Zenstruck\GithubCMSBundle\Github\Filesystem</parameter>
+        <parameter key="zenstruck.github.filesystem.class">Zenstruck\GithubBundle\Github\Filesystem</parameter>
     </parameters>
 
     <services>

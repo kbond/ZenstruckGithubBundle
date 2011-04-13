@@ -1,3 +1,0 @@
-github.cms.homepage:
-    pattern:  /{path}
-    defaults: { _controller: ZenstruckGithubCMSBundle:CMS:show, path: index }

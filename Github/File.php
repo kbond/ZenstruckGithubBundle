@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenstruck\GithubCMSBundle\Github;
+namespace Zenstruck\GithubBundle\Github;
 
 class File
 {
