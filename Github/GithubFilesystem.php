@@ -22,12 +22,6 @@ class GithubFilesystem
 
         $this->treeSHA = $this->getLatestTreeSHA();
     }
-    
-    public function getUser()
-    {
-        return $this->user;
-    }
-
 
     /**
      * @return GithubManager
@@ -56,7 +50,7 @@ class GithubFilesystem
 
         // file doesn't exist
         if (!$filesname)
-            throw new NotFoundHttpException('File not found in github repository');
+            return false;
 
         $file = $this->getFile($filesname);
 

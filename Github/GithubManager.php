@@ -16,6 +16,12 @@ class GithubManager
         $this->user = $user;
     }
     
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+
     /**
      * @return \Github_Client
      */
@@ -27,5 +33,10 @@ class GithubManager
     public function getFilesystem($repo, $branch = 'master')
     {
         return new GithubFilesystem($this, $this->user, $repo, $branch);
+    }
+    
+    public function getRepoInfo($repo)
+    {
+        return $this->client->getRepoApi()->show($this->user, $repo);
     }
 }
