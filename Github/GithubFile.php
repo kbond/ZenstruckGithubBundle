@@ -2,7 +2,7 @@
 
 namespace Zenstruck\GithubBundle\Github;
 
-class File
+class GithubFile
 {
     protected $path;
     protected $content;

@@ -2,41 +2,44 @@
 
 namespace Zenstruck\GithubBundle\Tests\Github;
 
-use Zenstruck\GithubBundle\Github\Filesystem;
+use Zenstruck\GithubBundle\Github\GithubManager;
+use Zenstruck\GithubBundle\Github\GithubFilesystem;
 
-class ManagerTest extends \PHPUnit_Framework_TestCase
+class GithubFilesystemTest extends \PHPUnit_Framework_TestCase
 {
-    protected $manager;
+    protected $github_filesystem;
 
     public function setUp()
     {
         $client = new \Github_Client();
+        
+        $manager = new GithubManager($client, 'kbond');
 
-        $this->manager = new Filesystem($client, 'kbond', 'GithubBundle', 'test-data');
+        $this->github_filesystem = $manager->getFilesystem('GithubBundle', 'test-data');
     }
 
     public function testFindFile()
     {
-        $file = $this->manager->getMatchingFile('index');
+        $file = $this->github_filesystem->getMatchingFile('index');
 
         $this->assertEquals($file->getPath(), 'index.md');
 
-        $file = $this->manager->getMatchingFile('index.md');
+        $file = $this->github_filesystem->getMatchingFile('index.md');
 
         $this->assertEquals($file->getPath(), 'index.md');
 
-        $file = $this->manager->getMatchingFile('subfolder/projects');
+        $file = $this->github_filesystem->getMatchingFile('subfolder/projects');
 
         $this->assertEquals($file->getPath(), 'subfolder/projects.md');
 
-        $file = $this->manager->getMatchingFile('htmlfile');
+        $file = $this->github_filesystem->getMatchingFile('htmlfile');
 
         $this->assertEquals($file->getPath(), 'htmlfile.html');
     }
 
     public function testFileWithNoExtension()
     {
-        $file = $this->manager->getMatchingFile('noextension');
+        $file = $this->github_filesystem->getMatchingFile('noextension');
 
         $this->assertEquals($file->getPath(), 'noextension');
 
@@ -44,7 +47,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testSubfolderIndex()
     {
-        $file = $this->manager->getMatchingFile('subfolder');
+        $file = $this->github_filesystem->getMatchingFile('subfolder');
 
         $this->assertEquals($file->getPath(), 'subfolder/index.md');
     }
@@ -54,17 +57,17 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testFileNotFound()
     {
-        $file = $this->manager->getMatchingFile('projects');
+        $file = $this->github_filesystem->getMatchingFile('projects');
     }
 
     public function testFileList()
     {
-        $list = $this->manager->getFileList();
+        $list = $this->github_filesystem->getFileList();
 
         $this->assertEquals(6, count($list));
         $this->assertContains('index.md', $list);
 
-        $list = $this->manager->getFileList('subfolder');
+        $list = $this->github_filesystem->getFileList('subfolder');
 
         $this->assertEquals(2, count($list));
         $this->assertContains('subfolder/index.md', $list);
@@ -72,11 +75,11 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFiles()
     {
-        $files = $this->manager->getFiles();
+        $files = $this->github_filesystem->getFiles();
 
         $this->assertEquals(6, count($files));
 
-        $files = $this->manager->getFiles('subfolder');
+        $files = $this->github_filesystem->getFiles('subfolder');
 
         $this->assertEquals(2, count($files));
     }

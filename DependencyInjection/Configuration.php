@@ -10,7 +10,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('zenstruck_version');
+        $rootNode = $treeBuilder->root('zenstruck_github');
 
         $rootNode
             ->children()                

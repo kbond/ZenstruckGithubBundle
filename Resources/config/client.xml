@@ -6,16 +6,9 @@
 
     <parameters>
         <parameter key="zenstruck.github.client.class">Github_Client</parameter>
-        <parameter key="zenstruck.github.filesystem.class">Zenstruck\GithubBundle\Github\Filesystem</parameter>
     </parameters>
 
     <services>
         <service id="zenstruck.github.client" class="%zenstruck.github.client.class%" />
-        <service id="zenstruck.github.filesystem" class="%zenstruck.github.filesystem.class%">
-            <argument type="service" id="zenstruck.github.client" />
-            <argument /> <!-- user -->
-            <argument /> <!-- repo -->
-            <argument /> <!-- branch -->
-        </service>
     </services>
 </container>

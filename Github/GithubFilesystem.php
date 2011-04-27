@@ -4,31 +4,44 @@ namespace Zenstruck\GithubBundle\Github;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class Filesystem
+class GithubFilesystem
 {
-    /* @var \Github_Client */
-
-    protected $client;
+    /* @var GithubManager */
+    protected $manager;
     protected $user;
     protected $repository;
     protected $treeSHA;
     protected $branch;
 
-    public function __construct(\Github_Client $client, $user, $repository, $branch)
+    public function __construct(GithubManager $manager, $user, $repository, $branch = 'master')
     {
-        $this->client = $client;
+        $this->manager = $manager;
         $this->user = $user;
         $this->repository = $repository;
         $this->branch = $branch;
 
         $this->treeSHA = $this->getLatestTreeSHA();
     }
+    
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+
+    /**
+     * @return GithubManager
+     */
+    public function getManager()
+    {
+        return $this->manager;
+    }
 
     /**
      * Matches a path to a github repo path, returns the blob array
      *
      * @param string $path
-     * @return File blob array
+     * @return GithubFile blob array
      */
     public function getMatchingFile($path)
     {
@@ -54,14 +67,14 @@ class Filesystem
      * Returns a file (exact repo path required)
      *
      * @param string $path
-     * @return File
+     * @return GithubFile
      */
     public function getFile($path)
     {
-        $blob = $this->client->getObjectApi()->showBlob($this->user, $this->repository, $this->treeSHA, $path);
-        $info = $this->client->getCommitApi()->getFileCommits($this->user, $this->repository, $this->branch, $path);
+        $blob = $this->manager->getClient()->getObjectApi()->showBlob($this->user, $this->repository, $this->treeSHA, $path);
+        $info = $this->manager->getClient()->getCommitApi()->getFileCommits($this->user, $this->repository, $this->branch, $path);
 
-        $file = new File();
+        $file = new GithubFile();
         $file->setPath($blob['name']);
         $file->setContent($blob['data']);
         $file->setAuthor($info[0]['author']['name']);
@@ -99,7 +112,7 @@ class Filesystem
      */
     public function getFileList($path = '')
     {
-        $blobs = $this->client->getObjectApi()->listBlobs($this->user, $this->repository, $this->treeSHA);
+        $blobs = $this->manager->getClient()->getObjectApi()->listBlobs($this->user, $this->repository, $this->treeSHA);
 
         if (!$path)
             return array_keys($blobs);
@@ -126,7 +139,7 @@ class Filesystem
 
     protected function getLatestTreeSHA()
     {
-        $commit = $this->client->getCommitApi()->getBranchCommits($this->user, $this->repository, $this->branch);
+        $commit = $this->manager->getClient()->getCommitApi()->getBranchCommits($this->user, $this->repository, $this->branch);
 
         return $commit[0]['tree'];
     }
