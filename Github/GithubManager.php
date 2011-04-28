@@ -39,4 +39,9 @@ class GithubManager
     {
         return $this->client->getRepoApi()->show($this->user, $repo);
     }
+    
+    public function getRepoTags($repo)
+    {
+        return $this->client->getRepoApi()->getRepoTags($this->user, $repo);
+    }
 }

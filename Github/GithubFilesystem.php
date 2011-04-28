@@ -30,6 +30,11 @@ class GithubFilesystem
     {
         return $this->manager;
     }
+    
+    public function getBranchCommits()
+    {
+        return $this->manager->getClient()->getCommitApi()->getBranchCommits($this->user, $this->repository, $this->branch);
+    }
 
     /**
      * Matches a path to a github repo path, returns the blob array
