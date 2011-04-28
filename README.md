@@ -10,8 +10,8 @@ Enables a Github repository to become the host of static content for your cms.
 
 1. Add this bundle and php-github-api to your Symfony2 project:
 
-    $ git submodule add git://github.com/kbond/GithubBundle.git vendor/bundles/Zenstruck/GithubBundle
-    $ git submodule add git://github.com/ornicar/php-github-api.git vendor/php-github-api
+        $ git submodule add git://github.com/kbond/GithubBundle.git vendor/bundles/Zenstruck/GithubBundle
+        $ git submodule add git://github.com/ornicar/php-github-api.git vendor/php-github-api
 
 2. Add the ``Zenstruck`` namespace to your autoloader:
 
