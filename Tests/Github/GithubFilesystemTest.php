@@ -52,12 +52,11 @@ class GithubFilesystemTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($file->getPath(), 'subfolder/index.md');
     }
 
-    /**
-     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
     public function testFileNotFound()
     {
         $file = $this->github_filesystem->getMatchingFile('projects');
+        
+        $this->assertFalse($file);
     }
 
     public function testFileList()
