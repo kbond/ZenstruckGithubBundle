@@ -23,14 +23,14 @@ class ZenstruckGithubExtension extends Extension
         if ($config['user']) {
             $loader->load('manager.xml');
             $container->getDefinition('zenstruck.github.manager')
-                    ->setArgument(1, $config['user']);
+                    ->replaceArgument(1, $config['user']);
         }
 
         if ($config['repo']) {
             $loader->load('filesystem.xml');
             $container->getDefinition('zenstruck.github.filesystem')                    
-                    ->setArgument(0, $config['repo'])
-                    ->setArgument(1, $config['branch']);
+                    ->replaceArgument(0, $config['repo'])
+                    ->replaceArgument(1, $config['branch']);
         }
     }
 
