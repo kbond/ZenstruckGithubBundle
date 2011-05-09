@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenstruck\GithubBundle\DependencyInjection;
+namespace Zenstruck\Bundle\GithubBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

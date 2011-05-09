@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenstruck\GithubBundle\DependencyInjection;
+namespace Zenstruck\Bundle\GithubBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;

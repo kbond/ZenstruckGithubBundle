@@ -36,7 +36,7 @@ Enables a Github repository to become the host of static content for your cms.
          {
              return array(
                  // ...
-                 new Zenstruck\GithubBundle\ZenstruckGithubBundle(),
+                 new Zenstruck\Bundle\GithubBundle\ZenstruckGithubBundle(),
                  // ...
              );
          }

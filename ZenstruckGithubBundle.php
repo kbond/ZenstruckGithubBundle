@@ -1,6 +1,6 @@
 <?php
 
-namespace Zenstruck\GithubBundle;
+namespace Zenstruck\Bundle\GithubBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Zenstruck\GithubBundle\Tests\Github;
+namespace Zenstruck\Bundle\GithubBundle\Tests\Github;
 
-use Zenstruck\GithubBundle\Github\GithubManager;
-use Zenstruck\GithubBundle\Github\GithubFilesystem;
+use Zenstruck\Bundle\GithubBundle\Github\GithubManager;
+use Zenstruck\Bundle\GithubBundle\Github\GithubFilesystem;
 
 class GithubFilesystemTest extends \PHPUnit_Framework_TestCase
 {
