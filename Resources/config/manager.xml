@@ -12,6 +12,7 @@
         <service id="zenstruck.github.manager" class="%zenstruck.github.manager.class%">
             <argument type="service" id="zenstruck.github.client" />
             <argument /> <!-- user -->
+            <argument /> <!-- token -->
         </service>
     </services>
 </container>

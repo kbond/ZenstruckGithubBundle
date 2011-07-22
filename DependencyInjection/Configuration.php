@@ -13,8 +13,9 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('zenstruck_github');
 
         $rootNode
-            ->children()                
+            ->children()
                 ->node('user', 'variable')->defaultNull()->end()
+                ->node('token', 'variable')->defaultNull()->end()
                 ->node('repo', 'variable')->defaultNull()->end()
                 ->node('branch', 'variable')->defaultValue('master')->end()
             ->end()
