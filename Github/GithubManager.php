@@ -10,13 +10,27 @@ class GithubManager
     protected $client;
     protected $user;
 
-    public function __construct(\Github_Client $client, $user, $token = null)
+    public function __construct(\Github_Client $client, $user, $token = null, $auth_type = null)
     {
         $this->client = $client;
         $this->user = $user;
 
         if ($token) {
-            $this->client->authenticate($user, $token, \Github_Client::AUTH_HTTP_TOKEN);
+            switch ($auth_type) {
+                case 'http_password':
+                    $type = \Github_Client::AUTH_HTTP_PASSWORD;
+                    break;
+
+                 case 'http_token':
+                    $type = \Github_Client::AUTH_HTTP_TOKEN;
+                    break;
+
+                default:
+                    $type = \Github_Client::AUTH_URL_TOKEN;
+                    break;
+            }
+
+            $this->client->authenticate($user, $token, $type);
         }
     }
 

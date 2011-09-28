@@ -24,7 +24,8 @@ class ZenstruckGithubExtension extends Extension
             $loader->load('manager.xml');
             $container->getDefinition('zenstruck.github.manager')
                     ->replaceArgument(1, $config['user'])
-                    ->replaceArgument(2, $config['token']);
+                    ->replaceArgument(2, $config['token'])
+                    ->replaceArgument(3, $config['auth_type']);
         }
 
         if ($config['repo']) {

@@ -13,6 +13,7 @@
             <argument type="service" id="zenstruck.github.client" />
             <argument /> <!-- user -->
             <argument /> <!-- token -->
+            <argument /> <!-- auth_type -->
         </service>
     </services>
 </container>

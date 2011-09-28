@@ -17,6 +17,7 @@ class Configuration implements ConfigurationInterface
                 ->node('user', 'variable')->defaultNull()->end()
                 ->node('token', 'variable')->defaultNull()->end()
                 ->node('repo', 'variable')->defaultNull()->end()
+                ->node('auth_type', 'variable')->defaultValue('url_token')->end()
                 ->node('branch', 'variable')->defaultValue('master')->end()
             ->end()
         ;
